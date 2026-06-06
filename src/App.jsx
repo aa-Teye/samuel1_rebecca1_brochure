@@ -69,9 +69,9 @@ function CoverPage() {
       className="w-screen h-screen shrink-0 snap-start relative overflow-hidden bg-stone-900 flex flex-col items-center justify-center"
     >
       {/* Video background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-60 flex items-center justify-center">
+      <div className="absolute inset-0 scale-110 pointer-events-none opacity-60">
         <iframe
-          className="absolute w-[350%] h-[150%] min-w-[178vh] min-h-full scale-[2.2] object-cover"
+          className="w-full h-full"
           src="https://www.youtube.com/embed/wjqAR25C540?autoplay=1&mute=1&loop=1&playlist=wjqAR25C540&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
           title="Wedding background video"
           frameBorder="0"
