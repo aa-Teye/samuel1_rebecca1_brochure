@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ChevronRight, Clock, User, Camera, Phone, Heart, ArrowRight } from 'lucide-react';
+import { ChevronRight, Clock, User, Camera, Phone, Heart } from 'lucide-react';
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -100,11 +100,11 @@ function CoverPage() {
 
         {/* Names */}
         <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl text-stone-50 tracking-wide leading-tight animate-fade-in-up">
-          Samuel Oteng
+          Samuel Oteng Danquah
           <br />
           <span className="text-stone-300/90 text-3xl sm:text-4xl md:text-5xl font-normal italic">&amp;</span>
           <br />
-          Rebbeca
+          Rebecca Quaye
         </h1>
 
         {/* Subtitle */}
@@ -359,7 +359,7 @@ function BrideLetterPage() {
           <div className="flex items-center gap-2">
             <div className="h-px w-8 bg-pink-300" />
             <span className="font-cormorant text-xs text-rose-600 italic">
-              Samuel &amp; Rebbeca
+              Samuel &amp; Rebecca
             </span>
             <div className="h-px w-8 bg-pink-300" />
           </div>
@@ -443,7 +443,7 @@ function GroomLetterPage() {
           <div className="flex items-center gap-2">
             <div className="h-px w-8 bg-amber-300" />
             <span className="font-cormorant text-xs text-amber-600 italic">
-              Samuel &amp; Rebbeca
+              Samuel &amp; Rebecca
             </span>
             <div className="h-px w-8 bg-amber-300" />
           </div>

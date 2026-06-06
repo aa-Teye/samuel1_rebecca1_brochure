@@ -1,3 +1,4 @@
+/* global process */
 import QRCode from 'qrcode';
 
 const url = 'https://samuel1rebecca1brochure.vercel.app/';
