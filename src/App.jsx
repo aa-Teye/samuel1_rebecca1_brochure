@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { ChevronRight, Clock, User, Camera, Phone, Heart, ArrowRight } from 'lucide-react';
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -43,17 +44,19 @@ const photoList = [
 
 // ─── PAGE INDICATOR ──────────────────────────────────────────────────────────
 
-function PageDots({ total, current }) {
+function PageDots({ total, current, scrollToPage }) {
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5 z-50 bg-black/25 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10">
       {Array.from({ length: total }).map((_, i) => (
-        <div
+        <button
           key={i}
-          className={`rounded-full transition-all duration-500 ${
+          onClick={() => scrollToPage(i)}
+          className={`rounded-full transition-all duration-300 cursor-pointer h-2 ${
             i === current
-              ? 'w-6 h-2 bg-stone-100'
-              : 'w-2 h-2 bg-stone-100/40'
+              ? 'w-6 bg-stone-100'
+              : 'w-2 bg-stone-100/40 hover:bg-stone-100/60'
           }`}
+          aria-label={`Go to page ${i + 1}`}
         />
       ))}
     </div>
@@ -282,7 +285,92 @@ function PhotographyPage() {
   );
 }
 
-// ─── PAGE 4: GROOM'S LETTER ──────────────────────────────────────────────────
+// ─── PAGE 4: BRIDE'S LETTER ──────────────────────────────────────────────────
+
+function BrideLetterPage() {
+  return (
+    <div
+      id="page-bride-letter"
+      className="w-screen h-screen shrink-0 snap-start flex items-center justify-center px-4 py-8 relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 30%, #fbcfe8 60%, #f9a8d4 100%)' }}
+    >
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 w-72 h-72 rounded-full opacity-30 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, #ec4899, transparent)' }} />
+      <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, #f472b6, transparent)' }} />
+
+      <div className="max-w-md w-full h-[90vh] bg-white/80 backdrop-blur-sm border border-pink-200 rounded-2xl shadow-lg shadow-pink-100 overflow-hidden flex flex-col relative">
+        {/* Card header */}
+        <div className="px-7 pt-8 pb-5 border-b border-pink-100" style={{ background: 'linear-gradient(135deg, #fff0f7, #fce7f3)' }}>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="h-px flex-1 bg-pink-200" />
+            <Heart className="text-pink-400 fill-pink-200" size={12} />
+            <div className="h-px flex-1 bg-pink-200" />
+          </div>
+          <div className="flex items-center gap-3 mt-4">
+            <div>
+              <p className="font-inter text-[10px] text-rose-500 tracking-wider uppercase mb-1">
+                A Letter From
+              </p>
+              <p className="font-cormorant text-sm text-rose-700 italic font-semibold">
+                The Bride
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Letter body */}
+        <div className="flex-1 overflow-y-auto custom-scroll px-7 py-6">
+          {/* Greeting */}
+          <h2 className="font-playfair text-2xl text-rose-900 italic mb-6">
+            My Love,
+          </h2>
+
+          <p className="font-inter text-sm text-rose-950/80 font-light leading-relaxed mb-5">
+            I love how our story started and where we are now. You have been such a precious gift in my life. Through every season, you have been my friend, my advisor, my safe place, and the voice that always guides me with love and wisdom.
+          </p>
+
+          <p className="font-inter text-sm text-rose-950/80 font-light leading-relaxed mb-5">
+            Your care, patience, and beautiful smile have made my life brighter in so many ways. Today, as I become your wife, my heart is full of gratitude for the man you are and the love we share.
+          </p>
+
+          <p className="font-inter text-sm text-rose-950/80 font-light leading-relaxed mb-8">
+            I promise to cherish, support, and love you always. Thank you for choosing me, and for making this journey so beautiful.
+          </p>
+
+          {/* Decorative divider */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px flex-1 bg-pink-100" />
+            <Heart className="text-pink-300 fill-pink-100" size={10} />
+            <div className="h-px flex-1 bg-pink-100" />
+          </div>
+
+          {/* Sign-off */}
+          <p className="font-playfair text-base text-rose-800 italic text-right leading-relaxed">
+            Forever yours,
+            <br />
+            <span className="text-lg text-rose-900 not-italic font-medium">Your Wife ❤️</span>
+          </p>
+
+          <div className="h-4" />
+        </div>
+
+        {/* Footer stamp */}
+        <div className="px-6 py-4 border-t border-pink-100 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #fff0f7, #fce7f3)' }}>
+          <div className="flex items-center gap-2">
+            <div className="h-px w-8 bg-pink-300" />
+            <span className="font-cormorant text-xs text-rose-600 italic">
+              Samuel &amp; Rebbeca
+            </span>
+            <div className="h-px w-8 bg-pink-300" />
+          </div>
+          <Heart className="text-rose-400 fill-rose-200" size={14} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── PAGE 5: GROOM'S LETTER ──────────────────────────────────────────────────
 
 function GroomLetterPage() {
   return (
@@ -369,16 +457,42 @@ function GroomLetterPage() {
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [activePage, setActivePage] = useState(0);
+  const scrollContainerRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!scrollContainerRef.current) return;
+    const scrollLeft = scrollContainerRef.current.scrollLeft;
+    const width = window.innerWidth;
+    const pageIndex = Math.round(scrollLeft / width);
+    setActivePage(pageIndex);
+  };
+
+  const scrollToPage = (pageIndex) => {
+    if (!scrollContainerRef.current) return;
+    const width = window.innerWidth;
+    scrollContainerRef.current.scrollTo({
+      left: pageIndex * width,
+      behavior: 'smooth',
+    });
+    setActivePage(pageIndex);
+  };
+
   return (
     <>
       {/* Page dots indicator */}
-      <PageDots total={4} current={0} />
+      <PageDots total={5} current={activePage} scrollToPage={scrollToPage} />
 
       {/* Main horizontal scroll container */}
-      <div className="h-screen w-screen overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory scroll-smooth bg-stone-900 scroll-hide">
+      <div 
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="h-screen w-screen overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory scroll-smooth bg-stone-900 scroll-hide"
+      >
         <CoverPage />
         <ChurchPage />
         <PhotographyPage />
+        <BrideLetterPage />
         <GroomLetterPage />
       </div>
     </>
